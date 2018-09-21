@@ -5,7 +5,10 @@ local params = std.extVar("__ksonnet/params").components["guestbook-ui"];
       "apiVersion": "v1",
       "kind": "Service",
       "metadata": {
-         "name": params.name
+         "name": params.name,
+         "annotations" : {
+            "service.beta.kubernetes.io/aws-load-balancer-extra-security-groups": params.securityGroups,
+        },
       },
       "spec": {
          "ports": [
@@ -24,7 +27,7 @@ local params = std.extVar("__ksonnet/params").components["guestbook-ui"];
       "apiVersion": "apps/v1beta2",
       "kind": "Deployment",
       "metadata": {
-         "name": params.name
+        "name": params.name,
       },
       "spec": {
          "replicas": params.replicas,

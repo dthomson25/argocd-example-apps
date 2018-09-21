@@ -13,6 +13,7 @@
       replicas: 1,
       servicePort: 80,
       type: "LoadBalancer",
+      securityGroups: "sg-b04efdc1,sg-58e5aa29",
     },
   },
 }
