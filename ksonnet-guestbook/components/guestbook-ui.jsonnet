@@ -1,14 +1,14 @@
 local env = std.extVar("__ksonnet/environments");
 local params = std.extVar("__ksonnet/params").components["guestbook-ui"];
+local securityGroups = if params.securityGroups != '' then {"service.beta.kubernetes.io/aws-load-balancer-extra-security-groups": params.securityGroups} else {};
+
 [
    {
       "apiVersion": "v1",
       "kind": "Service",
       "metadata": {
-         "name": params.name,
-         "annotations" : {
-            "service.beta.kubernetes.io/aws-load-balancer-extra-security-groups": params.securityGroups,
-        },
+        "name": params.name,
+        "annotations": securityGroups,
       },
       "spec": {
          "ports": [
