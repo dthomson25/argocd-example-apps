@@ -38,7 +38,22 @@ local securityGroups = if params.securityGroups != '' then {"service.beta.kubern
       ]
     }
   },
-   {
+  {
+    apiVersion: "v1",
+    kind: "Service",
+    metadata: { name: params.name },
+    spec: {
+        ports: [{
+            port: params.servicePort,
+            targetPort: params.containerPort
+        }],
+        selector: {
+            app: params.name
+        },
+        type: "NodePort"
+    }
+  }, 
+  {
       "apiVersion": "apps/v1beta2",
       "kind": "Deployment",
       "metadata": {
@@ -72,5 +87,5 @@ local securityGroups = if params.securityGroups != '' then {"service.beta.kubern
             }
          }
       }
-   }
+  }
 ]
