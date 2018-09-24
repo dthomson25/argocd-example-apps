@@ -13,7 +13,7 @@
       replicas: 1,
       servicePort: 443,
       type: "LoadBalancer",
-      securityGroups: "sg-b04efdc1,sg-58e5aa29",
+      securityGroups: "sg-0076960b053b37f5b",
     },
   },
 }
