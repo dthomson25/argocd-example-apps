@@ -11,7 +11,7 @@
       image: "gcr.io/heptio-images/ks-guestbook-demo:0.2",
       name: "ks-guestbook-ui",
       replicas: 1,
-      servicePort: 443,
+      servicePort: 80,
       type: "LoadBalancer",
       securityGroups: "sg-0c21b73ec28c9b324",
     },
