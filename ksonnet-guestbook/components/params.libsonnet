@@ -14,6 +14,14 @@
       servicePort: 80,
       type: "LoadBalancer",
       securityGroups: "sg-0bc6ba66872152017",
+      k8sIngressClass: "alb",
+      albBackendProtocol: "HTTP",
+      albScheme: "internet-facing",
+      albListenPorts: '[{"HTTP": 80}]',
+      albSubnets: "IngressSubnetAz1, IngressSubnetAz2, IngressSubnetAz3",
+      albSecurityGroups: "intuit-cidr-ingress-tcp-80",
+      healthCheckPath: "/",
+      sslPolicy: "ELBSecurityPolicy-TLS-1-2-2017-01"
     },
   },
 }

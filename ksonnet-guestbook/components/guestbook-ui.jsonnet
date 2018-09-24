@@ -4,25 +4,40 @@ local securityGroups = if params.securityGroups != '' then {"service.beta.kubern
 
 [
    {
-      "apiVersion": "v1",
-      "kind": "Service",
-      "metadata": {
-        "name": params.name,
-        "annotations": securityGroups,
+    apiVersion: "extensions/v1beta1",
+    kind: "Ingress",
+    metadata: {
+      name: params.name,
+      annotations: {
+        "kubernetes.io/ingress.class": params.k8sIngressClass,
+        "alb.ingress.kubernetes.io/backend-protocol": params.albBackendProtocol,
+        "alb.ingress.kubernetes.io/scheme": params.albScheme,
+        "alb.ingress.kubernetes.io/listen-ports": params.albListenPorts,
+        "alb.ingress.kubernetes.io/subnets": params.albSubnets,
+        "alb.ingress.kubernetes.io/security-groups": params.albSecurityGroups,
+        "alb.ingress.kubernetes.io/healthcheck-path": params.healthCheckPath,
+        "alb.ingress.kubernetes.io/ssl-policy": params.sslPolicy,
       },
-      "spec": {
-         "ports": [
-            {
-               "port": params.servicePort,
-               "targetPort": params.containerPort
-            }
-         ],
-         "selector": {
-            "app": params.name
-         },
-         "type": params.type
-      }
-   },
+      labels: {app: params.name},
+    },
+    spec: {
+      rules: [
+        {
+          http: {
+            paths: [
+              {
+                path: "/",
+                backend: {
+                  serviceName: params.name,
+                  servicePort: params.servicePort
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
    {
       "apiVersion": "apps/v1beta2",
       "kind": "Deployment",
