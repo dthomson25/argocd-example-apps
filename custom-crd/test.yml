@@ -9,7 +9,7 @@ spec:
   # list of versions supported by this CustomResourceDefinition
   version: v1
   # either Namespaced or Cluster
-  scope: Namespaced
+  scope: Cluster
   names:
     # plural name to be used in the URL: /apis/<group>/<version>/<plural>
     plural: crontabs
