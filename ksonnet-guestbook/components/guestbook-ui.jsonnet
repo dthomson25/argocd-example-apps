@@ -27,7 +27,6 @@ local params = std.extVar("__ksonnet/params").components["guestbook-ui"];
          "name": params.name
       },
       "spec": {
-         "replicas": params.replicas,
          "selector": {
             "matchLabels": {
                "app": params.name
