@@ -1,0 +1,39 @@
+---
+# Source: istio/templates/namespace.yaml
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: istio-system
+  annotations:
+    iks.intuit.com/managed: "false"
+    iks.image-policy.k8s.io/allowed-registries: "gcr.io,k8s.gcr.io,quay.io,docker.intuit.com,docker.artifactory.a.intuit.com"
+    iam.amazonaws.com/permitted: ".*"
+  labels:
+    istio-injection: disabled
+---
+# Source: istio/charts/galley/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: istio-galley-configuration
+  namespace: istio-system
+  labels:
+    app: galley
+    chart: galley
+    heritage: Tiller
+    release: istio
+    istio: galley
+data:
+  validatingwebhookconfiguration.yaml: |-
+    apiVersion: admissionregistration.k8s.io/v1beta1
+    kind: ValidatingWebhookConfiguration
+    metadata:
+      name: istio-galley
+      namespace: istio-system
+      labels:
+        app: galley
+        chart: galley
+        heritage: Tiller
+        release: istio
+        istio: galley
