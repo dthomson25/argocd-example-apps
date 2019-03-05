@@ -5,25 +5,6 @@ local params = std.extVar("__ksonnet/params").components["guestbook-ui"];
       "apiVersion": "v1",
       "kind": "Service",
       "metadata": {
-         "name": params.name + "-preview" 
-      },
-      "spec": {
-         "ports": [
-            {
-               "port": params.previewServicePort,
-               "targetPort": params.containerPort
-            }
-         ],
-         "selector": {
-            "app": params.name
-         },
-         "type": params.type
-      }
-   },
-   {
-      "apiVersion": "v1",
-      "kind": "Service",
-      "metadata": {
          "name": params.name + "-active" 
       },
       "spec": {
@@ -74,10 +55,8 @@ local params = std.extVar("__ksonnet/params").components["guestbook-ui"];
          },
          "minReadySeconds": 30,
          "strategy": {
-            "type": "BlueGreenUpdate",
             "blueGreen": {
                "activeService": params.name + "-active",
-               "previewService": params.name + "-preview",
             },
          },
       },

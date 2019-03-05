@@ -8,9 +8,9 @@
     // Each object below should correspond to a component in the components/ directory
     "guestbook-ui": {
       containerPort: 80,
-      image: "gcr.io/heptio-images/ks-guestbook-demo:0.2",
-      name: "ks-guestbook-ui",
-      replicas: 1,
+      image: "gcr.io/heptio-images/ks-guestbook-demo:0.1",
+      name: "guestbook-bluegreen",
+      replicas: 5,
       previewServicePort: 4010,
       activeServicePort: 4011,
       type: "LoadBalancer",
