@@ -72,6 +72,7 @@ local params = std.extVar("__ksonnet/params").components["guestbook-ui"];
                ]
             }
          },
+         "revisionHistoryLimit": 2,
          "minReadySeconds": 30,
          "strategy": {
             "blueGreen": {
