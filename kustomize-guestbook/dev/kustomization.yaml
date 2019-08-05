@@ -5,3 +5,7 @@ bases:
 
 commonLabels:
   environment: dev
+
+images:
+- name: gcr.io/heptio-images/ks-guestbook-demo
+  newTag: "0.3"
